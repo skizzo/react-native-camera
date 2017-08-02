@@ -84,9 +84,11 @@
 - (void)layoutSubviews
 {
   [super layoutSubviews];
-  self.manager.previewLayer.frame = self.bounds;
-  [self setBackgroundColor:[UIColor blackColor]];
-  [self.layer insertSublayer:self.manager.previewLayer atIndex:0];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    self.manager.previewLayer.frame = self.bounds;
+    [self setBackgroundColor:[UIColor blackColor]];
+    [self.layer insertSublayer:self.manager.previewLayer atIndex:0];
+  });
 }
 
 - (void)insertReactSubview:(UIView *)view atIndex:(NSInteger)atIndex
